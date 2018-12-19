@@ -37,7 +37,7 @@
 
 // YOUR CODE GOES BELOW HERE //
 function makeContact(id, nameFirst, nameLast) {
-
+    return {id: id, nameFirst: nameFirst, nameLast: nameLast};
 } 
 
 
@@ -45,19 +45,49 @@ function makeContactList() {
     /*
      * You need something here to hold contacts. See length api for a hint:
      */
-    var contacts;
-    
+    var contacts = [];
+ 
     return {
         // we implemented the length api for you //
         length: function() {
             return contacts.length;
+        },
+        addContact: function(contact) {
+            contacts.push(contact);
+        },
+        findContact: function(fullName) {
+            // splits the full name and makes them all lowercase to avoid any case confusion
+            let names = fullName.toLowerCase().split(' ');
+            for (let key in contacts) {
+                // compares lowercase first and last names to the split fullName
+                if (contacts[key].nameFirst.toLowerCase() === names[0] && contacts[key].nameLast.toLowerCase() === names[1]) {
+                    return contacts[key];
+                } else {
+                    return undefined;
+                }
+            }
+        },
+        removeContact: function(contact) {
+            // pick the index from where to start splicing the array
+            let index = 0;
+            for (let key in contacts) {
+                if (contact === contacts[key]) {
+                    contacts.splice(index, 1);
+                } else {
+                    index++;
+                }
+            }
+        },
+        printAllContactNames: function() {
+            let result = "";
+            for (let key in contacts) {
+                result += contacts[key].nameFirst + " " + contacts[key].nameLast + "\n";
+            }
+            return result.substr(0, result.length - 1);
         }
     }
+    
 }
-
-
-
-
 // YOUR CODE GOES ABOVE HERE //
 
 
