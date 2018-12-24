@@ -62,19 +62,15 @@ function makeContactList() {
                 // compares lowercase first and last names to the split fullName
                 if (contacts[key].nameFirst.toLowerCase() === names[0] && contacts[key].nameLast.toLowerCase() === names[1]) {
                     return contacts[key];
-                } else {
-                    return undefined;
                 }
             }
+            return undefined;
         },
         removeContact: function(contact) {
             // pick the index from where to start splicing the array
-            let index = 0;
-            for (let key in contacts) {
-                if (contact === contacts[key]) {
-                    contacts.splice(index, 1);
-                } else {
-                    index++;
+            for (let i = 0; i < contacts.length; i++) {
+                if (contact === contacts[i]) {
+                    contacts.splice(i, 1);
                 }
             }
         },
@@ -85,8 +81,7 @@ function makeContactList() {
             }
             return result.substr(0, result.length - 1);
         }
-    }
-    
+    };
 }
 // YOUR CODE GOES ABOVE HERE //
 
