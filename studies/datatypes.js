@@ -212,3 +212,68 @@ book.getPublcationYear(); // prints 1969
  * the possibilty for more human mistakes and improves readability.
  */
 
+// example of a function declaration
+function add(x, y) {
+    return x + y;
+}
+
+console.log(add(3, 25)); // prints 28
+
+/**
+ * add has two parameters (x and y). The function then returns the sum.
+ * add is then called by writing add() with any two numbers or variables in the 
+ * paranthese as arguments.
+ */
+
+/**
+ * UNDEFINED
+ * 
+ * 0. Undefined is the result when a variable has not been assigned or initialized a 
+ * value.
+ * 
+ * 1. Undefined is a primitive type of Javascript.
+ * 
+ * 2. A function will return undefined if a value was not returned.
+ */
+ 
+let x;
+console.log(typeof x); // prints undefined
+
+/**
+ * NULL
+ * 
+ * 0. Null expresses a lack of identification, which means that a variable points to no 
+ * object.
+ * 
+ * 1. Null is defined as an object for legacy reasons.
+ * 
+ * 2. Under strict equality (===), null is not equal to undefined, but with an equaltiy 
+ * operator (==), they are equal.
+ */
+
+let nullVar = null;
+console.log(typeof nullVar); // prints object
+
+// null and undefined comparisons
+console.log(null == undefined); // prints true
+console.log(null === undefined); // prints false
+
+/**
+ * PRIMITIVE AND COMPLEX DATA TYPES
+ * 
+ * 0. There are 6 primitive data types: Boolean, Null, Undefined, Number, String, and 
+ * Symbol.
+ * 
+ * 1. All primitive data types are not objects and have no methods.
+ * 
+ * 2. Primitive data types are immutable and are copied by value.  This means that 
+ * actual value of the variable is passed to the function or method since the size of the value in
+ * memory is 8 bytes or less, which is small and not a hassle to copy multiple times.
+ * 
+ * 3. There are 3 complex data types: Object, Array, and Function.
+ * 
+ * 4. Complex data types are mutable and are copied by reference. This means that only 
+ * the location in memory of the value is passed to the function or method.  Complex 
+ * data types can have an indefinite size, and it would be costly to copy the entire 
+ * value each time it is called.
+ */
