@@ -61,7 +61,6 @@ animal.noises.push("belch");
 var animals = [];
 animals.push(animal);
 var duck = {species: 'duck', name: "Jerome", noises: ["quack", "honk", "sneeze", "woosh"]};
-animals.push(duck);
 var cat = {species: "cat", name: "Lili von Shtupp", noises: ["meow", "purr"]};
 var dog = {species: "dog", name: "Buttons", noises: ["woof", "bow wow", "arf"]};
 animals.push(duck, cat, dog);
