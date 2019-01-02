@@ -27,20 +27,36 @@ function search(animals, name) {
 //////////////////////////////////////////////////////////////////////
 
 function replace(animals, name, replacement) {
-    
+    for (var key in animals) {
+        if (name.toLowerCase() === animals[key].name.toLowerCase()) {
+            animals[key] = replacement;
+        }
+    }
 }
 
 //////////////////////////////////////////////////////////////////////
 // Step 3 - Remove ///////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-
+function remove(animals, name) {
+    for (var key in animals) {
+        if (name.toLowerCase() === animals[key].name.toLowerCase()) {
+            animals.splice(key, 1);
+        }
+    }
+}
 
 //////////////////////////////////////////////////////////////////////
 // Step 4 - Create ///////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-
+function add(animals, animal) {
+    if (animal.hasOwnProperty("name") && animal.hasOwnProperty("species")) {
+        if (search(animals, animal.name) === null) {
+            animals.push(animal);
+        }
+    }
+}
 
 /**
  * You did it! You're all done with Matchy!
