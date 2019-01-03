@@ -182,9 +182,9 @@ delete book.author;
 console.log(book.author); // prints undefined
 
 // adding a new method to an object
-book.prototype.getPublcationYear = function() {
+book.getPublcationYear = function() {
     console.log(this.yearPublished);
-}
+};
 
 book.getPublcationYear(); // prints 1969
 
