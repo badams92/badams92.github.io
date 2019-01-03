@@ -51,10 +51,8 @@ function remove(animals, name) {
 //////////////////////////////////////////////////////////////////////
 
 function add(animals, animal) {
-    if (animal.hasOwnProperty("name") && animal.hasOwnProperty("species")) {
-        if (search(animals, animal.name) === null) {
-            animals.push(animal);
-        }
+    if (animal.hasOwnProperty("name") && animal.hasOwnProperty("species") && search(animals, animal.name) === null) {
+        animals.push(animal);
     }
 }
 
