@@ -106,11 +106,7 @@ function maybeNoises(object) {
 //////////////////////////////////////////////////////////////////////
 
 function hasWord(string, word) {
-    if (string.indexOf(word) !== -1) {
-        return true;
-    } else {
-        return false;
-    }
+    return (string.indexOf(word) !== -1);
 }
 
 //////////////////////////////////////////////////////////////////////
