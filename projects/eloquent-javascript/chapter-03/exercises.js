@@ -35,10 +35,15 @@ function isEven(n) {
 
 function countChars(string, char) {
   let count = 0;
-  let position = string.indexOf(char);
-  while (position !== -1) {
-    count++;
-    position = string.indexOf(char, position + 1);
+  // let position = string.indexOf(char);
+  // while (position !== -1) {
+  //   count++;
+  //   position = string.indexOf(char, position + 1);
+  // }
+  for (let i = 0; i < string.length; i++) {
+    if (string[i] === char) {
+      count++;
+    }
   }
   return count;
 }
