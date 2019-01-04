@@ -114,7 +114,8 @@ function hasWord(string, word) {
 //////////////////////////////////////////////////////////////////////
 
 function addFriend (name, object) {
-
+    object.friends.push(name);
+    return object;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -122,7 +123,11 @@ function addFriend (name, object) {
 //////////////////////////////////////////////////////////////////////
 
 function isFriend(name, object) {
-
+    if (object.hasOwnProperty("friends")){
+        return (object.friends.includes(name));
+    } else {
+        return false;
+    }
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -130,7 +135,24 @@ function isFriend(name, object) {
 //////////////////////////////////////////////////////////////////////
 
 function nonFriends(name, array) {
-
+    let names = [];
+    let friends = [];
+    let result = [];
+    // loops through data array to find list of names and the appropriate friends array
+    for (let i = 0; i < array.length; i++) {
+        names.push(array[i].name);
+        if (array[i].name === name) {
+            friends = array[i].friends;
+        }
+    }
+    
+    // loops through names and compares them to the friends array
+    for (let j = 0; j < names.length; j++) {
+        if (!friends.includes(names[j]) && name !== names[j]){
+            result.push(names[j]);
+        }
+    }
+    return result;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -138,7 +160,8 @@ function nonFriends(name, array) {
 //////////////////////////////////////////////////////////////////////
 
 function updateObject(object, key, value) {
-
+    object[key] = value;
+    return object;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -146,7 +169,14 @@ function updateObject(object, key, value) {
 //////////////////////////////////////////////////////////////////////
 
 function removeProperties(object, array) {
-
+    if (array.length > 0){
+        for (let i = 0; i < array.length; i++) {
+            if (object.hasOwnProperty(array[i])){ 
+                delete object[array[i]];
+            }
+        }
+    }
+    return object;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -154,7 +184,15 @@ function removeProperties(object, array) {
 //////////////////////////////////////////////////////////////////////
 
 function dedup(array) {
-
+    let result = [];
+    array.sort();
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] !== array[i + 1]){
+            result.push(array[i]);
+        }
+    }
+    console.log(result);
+    return result;
 }
 
 //////////////////////////////////////////////////////////////////////
