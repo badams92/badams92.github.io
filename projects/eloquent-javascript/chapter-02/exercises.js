@@ -36,7 +36,7 @@ function drawChessboard(size = 8) {
   let str = "";
   for (let i = 0; i < size; i++) {
     if (i % 2 === 0) {
-        str += " #".repeat(size/2) + (size % 2 === 0 ? "\n" : " \n");
+      str += " #".repeat(size/2) + (size % 2 === 0 ? "\n" : " \n");
     } else {
       str += "# ".repeat(size/2) + (size % 2 === 0 ? "\n" : "#\n");
     }

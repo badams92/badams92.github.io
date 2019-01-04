@@ -191,7 +191,6 @@ function dedup(array) {
             result.push(array[i]);
         }
     }
-    console.log(result);
     return result;
 }
 
