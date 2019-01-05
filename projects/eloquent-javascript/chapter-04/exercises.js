@@ -114,20 +114,33 @@ function nth(list, index) {
 ////////////////////////////////////////////////////////////////////////////////
 
 function deepEqual(object1, object2) {
-  if (typeof object1 == "object" && typeof object2 == "object" && object1 != null && object2 != null) {
-    if (Object.keys(object1) == Object.keys(object2)) {
-      for (let key in object1) {
-        if(typeof object1[key] == typeof object2[key] == 'object'){
-          return deepEqual(object1[key], object2[key]);
-        } else if (typeof object1[key] == typeof object2[key]) {
-          return object1[key] === object2[key];
-        }
-      }
-    } else {
+  // if they're equal, return true
+  if (object1 === object2) {
+    return true;
+  } 
+  // if the objects are objects and not null, proceed
+  else if ((typeof object1 == "object" && object1 != null) && (typeof object2 == "object"  && object2 != null)) {
+    // if their array of keys is not the same length, return false
+    if (Object.keys(object1).length != Object.keys(object2).length) {
       return false;
     }
+    // iterate through each key in one object
+    for (let key in object1) {
+      // if the other object does not have the same key as a property, return false
+      if (!object2.hasOwnProperty(key)) {
+        return false;
+      }
+      // recursively check properties for which they have same key names
+      // if they are not the same, return false
+      if (!deepEqual(object1[key], object2[key])) {
+        return false;
+      }
+    }
+    // if it passes through all other return false statements, it must return true
+    return true;
+  // if they're not equal, and not non-null objects, must be false
   } else {
-    return object1 === object2;
+    return false;
   }
 }
 
