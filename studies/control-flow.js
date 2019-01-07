@@ -23,8 +23,8 @@
  * At the end of an IF block, you can have an ELSE segment, which is essentially an ELSE 
  * IF (true), so it will always evaluate the code that follows.
  * 
- * You will always want your IF, ELSE-IF, ELSE block to start from more restrictive and 
- * become less strict.
+ * You will always want your IF, ELSE-IF, ELSE block to start at the most restrictive 
+ * conditions and become less strict.
  * 
  */
  
