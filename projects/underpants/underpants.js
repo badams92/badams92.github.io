@@ -8,7 +8,7 @@ var _ = {};
 
 /**
 * START OF OUR LIBRARY!
-* Implement each function below it's instructions
+* Implement each function below its instructions
 */
 
 /** _.identity
@@ -21,6 +21,9 @@ var _ = {};
 *   _.identity({a: "b"}) === {a: "b"}
 */
 
+_.identity = function(value) {
+    return value;
+}
 
 /** _.typeOf
 * Arguments:
@@ -42,6 +45,17 @@ var _ = {};
 * _.typeOf([1,2,3]) -> "array"
 */
 
+_.typeOf = function(value) {
+    if (value === null) {
+        return "null";
+    } else if (value instanceof Date) {
+        return "date";
+    } else if (Array.isArray(value)) {
+        return "array";
+    } else {
+        return typeof value;
+    }
+}
 
 /** _.first
 * Arguments:
@@ -61,6 +75,16 @@ var _ = {};
 *   _.first(["a", "b", "c"], 2) -> ["a", "b"]
 */
 
+_.first = function(arr, num) {
+    if (!Array.isArray(arr)) return [];
+    if (typeof num !== "number") return arr[0];
+    if (num > arr.length) {
+        return arr;
+    } else if (num > 0) {
+        return arr.slice(0, num);
+    } 
+    return [];
+}
 
 /** _.last
 * Arguments:
@@ -80,6 +104,16 @@ var _ = {};
 *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
 */
 
+_.last = function(arr, num) {
+    if (!Array.isArray(arr)) return [];
+    if (typeof num !== "number") return arr[arr.length - 1];
+    if (num > arr.length) {
+        return arr;
+    } else if (num > 0) {
+        return arr.slice(-num);
+    } 
+    return [];
+}
 
 /** _.indexOf
 * Arguments:
@@ -97,6 +131,12 @@ var _ = {};
 *   _.indexOf(["a","b","c"], "d") -> -1
 */
 
+_.indexOf = function(arr, value) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === value) return i;
+    }
+    return -1;
+}
 
 /** _.contains
 * Arguments:
@@ -113,6 +153,9 @@ var _ = {};
 *   _.contains([1,"two", 3.14], "two") -> true
 */
 
+_.contains = function(arr, value) {
+    return (_.indexOf(arr, value) !== -1 ? true : false);
+}
 
 /** _.each
 * Arguments:
@@ -121,15 +164,26 @@ var _ = {};
 * Objectives:
 *   1) if <collection> is an array, call <function> once for each element
 *      with the arguments:
-*         the element, it's index, <collection>
+*         the element, its index, <collection>
 *   2) if <collection> is an object, call <function> once for each property
 *      with the arguments:
-*         the property's value, it's key, <collection>
+*         the property's value, its key, <collection>
 * Examples:
 *   _.each(["a","b","c"], function(e,i,a){ console.log(e)});
 *      -> should log "a" "b" "c" to the console
 */
 
+_.each = function(collection, func) {
+    if (Array.isArray(collection)) {
+        for (let i = 0; i < collection.length; i++) {
+            func(collection[i], i, collection);
+        }
+    } else if (typeof collection === "object" && collection !== null) {
+        for (let key in collection) {
+            func(collection[key], key, collection);
+        }
+    }
+}
 
 /** _.unique
 * Arguments:
@@ -141,6 +195,14 @@ var _ = {};
 *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */
 
+_.unique = function(arr) {
+    let result = [];
+    for (let i = 0; i < arr.length; i++) {
+        // if the element isn't in the results array, push it
+        if (_.indexOf(result, arr[i]) === -1) result.push(arr[i]);
+    }
+    return result;
+}
 
 /** _.filter
 * Arguments:
@@ -148,7 +210,7 @@ var _ = {};
 *   2) A function
 * Objectives:
 *   1) call <function> for each element in <array> passing the arguments:
-*      the element, it's index, <array>
+*      the element, its index, <array>
 *   2) return a new array of elements for which calling <function> returned true
 * Edge Cases:
 *   1) What if <function> returns something other than true or false?
@@ -158,6 +220,14 @@ var _ = {};
 *   use _.each in your implementation
 */
 
+_.filter = function (arr, func) {
+    let result = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (func(arr[i], i, arr)) result.push(arr[i]);
+    }
+    return result;
+    
+}
 
 /** _.reject
 * Arguments:
