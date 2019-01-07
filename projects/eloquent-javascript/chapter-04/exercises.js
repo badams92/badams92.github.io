@@ -62,11 +62,14 @@ function reverseArrayInPlace(arr) {
 
 function arrayToList(arr) {
   let list = {};
+  // base case with an array of length 1
   if (arr.length === 1) {
     list.value = arr[0];
     list.rest = null;
-  } else {
+  // recursive case for arrays of length > 1
+  } else if (arr.length > 1) {
     list.value = arr[0];
+    // recursively call arrayToList() with the rest of the array
     list.rest = arrayToList(arr.slice(1));
   }
   return list;
@@ -103,6 +106,9 @@ function nth(list, index) {
   if (index > -1) {
     let current = list;
     for (let i = 0; i < index; i++) {
+      if (current.rest === null) {
+        return undefined;
+      }
       current = current.rest;
     }
     return current.value;

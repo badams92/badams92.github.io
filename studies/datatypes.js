@@ -51,8 +51,7 @@ console.log(-5 / 0); // prints -Infinity.
  *  1. Indeterminate forms, such as 0 divided by 0 and Infinity multiplied by Infinity
  *  2. Operations that return a complex number, such as taking the square root of a 
  *  negative number.
- * 
- * 3. Mixing numbers with other datatypes.
+ *  3. Mixing numbers with other datatypes.
  */
  
 console.log(Math.sqrt(-9)); // prints NaN
@@ -78,7 +77,7 @@ console.log(single + double); // prints "single quotesdouble quotes"
 
 /** 
  * Backticks allow for string interpolation, where any expression can be embedded into
- * the string, such as function calls.
+ * the string, such as function calls, and for strings to span multiple lines.
  */
 console.log(`5 + 9 = ${5 + 9}`); // prints "5 + 9 = 14"
 
@@ -100,8 +99,8 @@ var myBool = false;
 console.log(myBool); // prints false;
 
 /**
- * Comparison operators such as equal to (==), greater
- * than (>), and (<) all return boolean values.
+ * Comparison operators such as equal to (==), greater than (>), and (<) all return 
+ * boolean values.
  */
 console.log(42 > 13); // prints true;
 

@@ -32,8 +32,6 @@
  * which that function was declared.  The environment consists of any local variables 
  * that were in-scope at the time the closure was created.  Closures are useful because 
  * they let you associate some data with a function that operates on that data.
- * 
- * 
  */
  
 // function declaration with the parameters of two variables
@@ -48,7 +46,8 @@ console.log(multiply(17, 24)); // prints 408
 // function expression, assigning an anonymous function to a variable
 var func1 = function() {
     console.log("hello");
-}
+};
+
 console.log(func1); // prints [Function]
 console.log(multiply()); //
 

@@ -22,6 +22,11 @@ let arr = ["apple", "banana", "kiwi", "dragon fruit", "eggplant"];
 for (let key in arr) {
     console.log(arr[key]);
 }
+
+// we can also iterate backwards through an array
+for (let i = arr.length - 1; i > -1; i--) {
+    console.log(arr[i]);
+}
 // prints each element of the array on a new line
 
 let obj = {
@@ -35,14 +40,20 @@ for (let key in obj) {
 }
 // prints the values of the object on a new line
 
-// while loop
-let myBool = true;
-let index = 0;
-while (myBool) {
-    if (23 > index) {
-        myBool = false;
-    }
-    index++;
+/**
+ * While loops are used when the end condition can change during runtime, or the amount 
+ * of times to iterate is not known at the time of writing.
+ * 
+ * While loops run when their condition is true, and this condition can be manipulated 
+ * by other functions.
+ */
+let arr2 = [1, 2, 3, 4, 5, 6];
+while (arr2.length > 0) {
+    console.log(arr2.pop());
 }
-// iterates through the loop 23 times, until myBool is changed to false, and the 
-// loop ends.
+/**
+ * loops until the array has only one element. Its end condition changes because we are 
+ * manipulating the contents and length of the array.
+ */
+
+
