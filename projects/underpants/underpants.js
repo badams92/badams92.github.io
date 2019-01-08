@@ -280,9 +280,9 @@ _.partition = function(arr, func) {
 * Objectives:
 *   1) call <function> for each element in <collection> passing the arguments:
 *        if <collection> is an array:
-*            the element, it's index, <collection>
+*            the element, its index, <collection>
 *        if <collection> is an object:
-*            the value, it's key, <collection>
+*            the value, its key, <collection>
 *   2) save the return value of each <function> call in a new array
 *   3) return the new array
 * Examples:
@@ -362,7 +362,7 @@ _.every = function (collection, func = (x) => {return !!x}) {
 * Objectives:
 *   1) Call <function> for every element of <collection> with the paramaters:
 *       if <collection> is an array:
-*        current element, it's index, <collection>
+*        current element, its index, <collection>
 *       if <collection> is an object:
 *        current value, current key, <collection>
 *   2) If the return value of calling <function> is true for at least one element, return true
@@ -412,18 +412,14 @@ _.some = function (collection, func = (x) => {return !!x}) {
 */
 
 _.reduce = function(arr, func, seed) {
-    console.log(typeof seed);
-    let previousResult;
+    let previousResult = seed;
     let start = 0;
     if (typeof seed === "undefined") {
         previousResult = arr[0];
         start = 1;
-    } else {
-        previousResult = seed;
-    }
+    } 
     for (let i = start; i < arr.length; i++) {
         previousResult = func(previousResult, arr[i], i);
-        console.log(previousResult);
     }
     return previousResult;
 }
