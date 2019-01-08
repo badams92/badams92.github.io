@@ -226,7 +226,6 @@ _.filter = function (arr, func) {
         if (func(arr[i], i, arr)) result.push(arr[i]);
     }
     return result;
-    
 }
 
 /** _.reject
@@ -235,13 +234,21 @@ _.filter = function (arr, func) {
 *   2) A function
 * Objectives:
 *   1) call <function> for each element in <array> passing the arguments:
-*      the element, it's index, <array>
+*      the element, its index, <array>
 *   2) return a new array of elements for which calling <function> returned false
-*   3) This is the logical inverse if _.filter(), you must use _.filter() in your implementation
+*   3) This is the logical inverse of _.filter(), you must use _.filter() in your implementation
 * Examples:
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
 
+_.reject = function(arr, func) {
+    let result = [];
+    let passing = _.filter(arr, func);
+    for (let i = 0; i < arr.length; i++) {
+        if (!_.contains(passing, arr[i])) result.push(arr[i]);
+    }
+    return result;
+}
 
 /** _.partition
 * Arguments:
@@ -262,6 +269,9 @@ _.filter = function (arr, func) {
 }
 */
 
+_.partition = function(arr, func) {
+    return [_.filter(arr, func), _.reject(arr, func)];
+}
 
 /** _.map
 * Arguments:
@@ -279,6 +289,19 @@ _.filter = function (arr, func) {
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
 
+_.map = function(collection, func) {
+    let result = [];
+    if (Array.isArray(collection)) {
+        for (let i = 0; i < collection.length; i++) {
+            result.push(func(collection[i], i, collection));
+        }
+    } else if (collection !== null && typeof collection === "object") {
+        for (let key in collection) {
+            result.push(func(collection[key], key, collection));
+        }
+    }
+    return result;
+}
 
 /** _.pluck
 * Arguments:
@@ -291,6 +314,9 @@ _.filter = function (arr, func) {
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
 
+_.pluck = function(arr, prop) {
+    return _.map(arr, obj => obj[prop]);
+}
 
 /** _.every
 * Arguments:
@@ -299,7 +325,7 @@ _.filter = function (arr, func) {
 * Objectives:
 *   1) Call <function> for every element of <collection> with the paramaters:
 *      if <collection> is an array:
-*          current element, it's index, <collection>
+*          current element, its index, <collection>
 *      if <collection> is an object:
 *          current value, current key, <collection>
 *   2) If the return value of calling <function> for every element is true, return true
@@ -313,6 +339,21 @@ _.filter = function (arr, func) {
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
 
+_.every = function (collection, func = (x) => {return !!x}) {
+    let myBool = true;
+    if (Array.isArray(collection)) {
+        for (let i = 0; i < collection.length; i++) {
+            myBool = func(collection[i], i, collection) && myBool;
+            if (!myBool) return false;
+        }
+    } else if (collection !== null && typeof collection === "object"); {
+        for (let key in collection) {
+            myBool = func(collection[key], key, collection) && myBool;
+            if (!myBool) return false;
+        }
+    }
+    return myBool;
+}
 
 /** _.some
 * Arguments:
@@ -335,6 +376,21 @@ _.filter = function (arr, func) {
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
 
+_.some = function (collection, func = (x) => {return !!x}) {
+    let myBool = false;
+    if (Array.isArray(collection)) {
+        for (let i = 0; i < collection.length; i++) {
+            myBool = func(collection[i], i, collection) || myBool;
+            if (myBool) return true;
+        }
+    } else if (collection !== null && typeof collection === "object"); {
+        for (let key in collection) {
+            myBool = func(collection[key], key, collection) || myBool;
+            if (myBool) return true;
+        }
+    }
+    return myBool;
+}
 
 /** _.reduce
 * Arguments:
@@ -355,6 +411,22 @@ _.filter = function (arr, func) {
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
 
+_.reduce = function(arr, func, seed) {
+    console.log(typeof seed);
+    let previousResult;
+    let start = 0;
+    if (typeof seed === "undefined") {
+        previousResult = arr[0];
+        start = 1;
+    } else {
+        previousResult = seed;
+    }
+    for (let i = start; i < arr.length; i++) {
+        previousResult = func(previousResult, arr[i], i);
+        console.log(previousResult);
+    }
+    return previousResult;
+}
 
 /** _.extend
 * Arguments:
@@ -371,6 +443,14 @@ _.filter = function (arr, func) {
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
 
+_.extend = function(obj1, ...theArgs) {
+    for (let i = 0; i < theArgs.length; i++) {
+        for (let key in theArgs[i]) {
+            obj1[key] = theArgs[i][key];
+        }
+    }
+    return obj1;
+}
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
