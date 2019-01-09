@@ -197,10 +197,9 @@ _.each = function(collection, func) {
 
 _.unique = function(arr) {
     let result = [];
-    for (let i = 0; i < arr.length; i++) {
-        // if the element isn't in the results array, push it
-        if (_.indexOf(result, arr[i]) === -1) result.push(arr[i]);
-    }
+    _.each(arr, function(e, i, a) {
+        if (_.indexOf(result, e) === -1) result.push(e);
+    });
     return result;
 }
 
@@ -244,9 +243,9 @@ _.filter = function (arr, func) {
 _.reject = function(arr, func) {
     let result = [];
     let passing = _.filter(arr, func);
-    for (let i = 0; i < arr.length; i++) {
-        if (!_.contains(passing, arr[i])) result.push(arr[i]);
-    }
+    _.each(arr, function(e, i, a) {
+        if (!_.contains(passing, e)) result.push(e);
+    });
     return result;
 }
 
@@ -366,7 +365,7 @@ _.some = function (collection, func = (x) => {return !!x}) {
     let myBool = false;
     _.each(collection, function(e, i, a) {
         myBool = func(e, i, a) || myBool;
-    })
+    });
     return myBool;
 }
 
@@ -418,11 +417,12 @@ _.reduce = function(arr, func, seed) {
 */
 
 _.extend = function(obj1, ...theArgs) {
-    for (let i = 0; i < theArgs.length; i++) {
-        for (let key in theArgs[i]) {
-            obj1[key] = theArgs[i][key];
-        }
-    }
+    _.each(theArgs, function(e, i, a){
+        // theArgs is an array of objects, so apply _.each() to each obj
+        _.each(e, function(prop, key, obj) {
+           obj1[key] = obj[key]; 
+        });
+    });
     return obj1;
 }
 //////////////////////////////////////////////////////////////////////
