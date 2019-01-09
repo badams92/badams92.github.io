@@ -222,9 +222,9 @@ _.unique = function(arr) {
 
 _.filter = function (arr, func) {
     let result = [];
-    for (let i = 0; i < arr.length; i++) {
-        if (func(arr[i], i, arr)) result.push(arr[i]);
-    }
+    _.each(arr, function(e, i, a){
+        if (func(e, i, a)) result.push(e);
+    });
     return result;
 }
 
@@ -291,15 +291,9 @@ _.partition = function(arr, func) {
 
 _.map = function(collection, func) {
     let result = [];
-    if (Array.isArray(collection)) {
-        for (let i = 0; i < collection.length; i++) {
-            result.push(func(collection[i], i, collection));
-        }
-    } else if (collection !== null && typeof collection === "object") {
-        for (let key in collection) {
-            result.push(func(collection[key], key, collection));
-        }
-    }
+    _.each(collection, function(e, i, a) {
+        result.push(func(e, i, a));
+    });
     return result;
 }
 
@@ -341,17 +335,9 @@ _.pluck = function(arr, prop) {
 
 _.every = function (collection, func = (x) => {return !!x}) {
     let myBool = true;
-    if (Array.isArray(collection)) {
-        for (let i = 0; i < collection.length; i++) {
-            myBool = func(collection[i], i, collection) && myBool;
-            if (!myBool) return false;
-        }
-    } else if (collection !== null && typeof collection === "object"); {
-        for (let key in collection) {
-            myBool = func(collection[key], key, collection) && myBool;
-            if (!myBool) return false;
-        }
-    }
+    _.each(collection, function(e, i, a) {
+        myBool = func(e, i, a) && myBool;
+    });
     return myBool;
 }
 
@@ -378,17 +364,9 @@ _.every = function (collection, func = (x) => {return !!x}) {
 
 _.some = function (collection, func = (x) => {return !!x}) {
     let myBool = false;
-    if (Array.isArray(collection)) {
-        for (let i = 0; i < collection.length; i++) {
-            myBool = func(collection[i], i, collection) || myBool;
-            if (myBool) return true;
-        }
-    } else if (collection !== null && typeof collection === "object"); {
-        for (let key in collection) {
-            myBool = func(collection[key], key, collection) || myBool;
-            if (myBool) return true;
-        }
-    }
+    _.each(collection, function(e, i, a) {
+        myBool = func(e, i, a) || myBool;
+    })
     return myBool;
 }
 
