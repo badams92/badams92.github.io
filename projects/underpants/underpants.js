@@ -241,10 +241,12 @@ _.filter = function (arr, func) {
 */
 
 _.reject = function(arr, func) {
+    // commented out code uses _.filter(), per instructions
     let result = [];
-    let passing = _.filter(arr, func);
+    // let passing = _.filter(arr, func);
     _.each(arr, function(e, i, a) {
-        if (!_.contains(passing, e)) result.push(e);
+        // if (!_.contains(passing, e)) result.push(e);
+        if (!func(e, i, a)) result.push(e);
     });
     return result;
 }
@@ -389,16 +391,14 @@ _.some = function (collection, func = (x) => {return !!x}) {
 */
 
 _.reduce = function(arr, func, seed) {
-    let previousResult = seed;
-    let start = 0;
-    if (typeof seed === "undefined") {
-        previousResult = arr[0];
-        start = 1;
-    } 
-    for (let i = start; i < arr.length; i++) {
-        previousResult = func(previousResult, arr[i], i);
-    }
-    return previousResult;
+    _.each(arr, function(e, i, a) {
+        if (seed === undefined) {
+            seed = a[0];
+        } else {
+            seed = func(seed, e, i);
+        }
+    });
+    return seed;
 }
 
 /** _.extend
