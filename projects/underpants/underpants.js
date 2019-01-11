@@ -420,7 +420,7 @@ _.extend = function(obj1, ...theArgs) {
     _.each(theArgs, function(e, i, a){
         // theArgs is an array of objects, so apply _.each() to each obj
         _.each(e, function(prop, key, obj) {
-           obj1[key] = obj[key]; 
+           obj1[key] = prop; 
         });
     });
     return obj1;
