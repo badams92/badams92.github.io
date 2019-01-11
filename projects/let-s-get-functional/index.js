@@ -3,7 +3,7 @@
 'use strict';
 
 var customers = require('./data/customers.json');
-var _ = require(/* Replace this with the name of your lodown! */);
+var _ = require('lodown-badams92');
 
 /**
  * 1. Import your lodown module using the require() method,
@@ -20,20 +20,51 @@ var _ = require(/* Replace this with the name of your lodown! */);
  */
 
 var maleCount = function(array) {
-
+    return _.filter(array, (e, i, a) => {
+        return e.gender === "male";
+    }).length;
 };
 
-var femaleCount;
+var femaleCount = function(array) {
+    return  _.reduce(array, (seed, element, index) => {
+        if (element.gender === "female") seed++;
+        return seed;
+    }, 0);
+};
 
-var oldestCustomer;
+var oldestCustomer = function(array) {
+    let eldest = array[0];
+    _.each(array, (e, i, a) => {
+        if (e.age > eldest.age) eldest = e;
+    });
+    return eldest.name;
+};
 
-var youngestCustomer;
+var youngestCustomer = function(array) {
+    let youth = array[0];
+    _.each(array, (e, i, a) => {
+        if (youth.age > e.age) youth = e;
+    })
+    return youth.name;
+};
 
-var averageBalance;
+var averageBalance = function(array) {
+    return  _.reduce(array, (seed, e, i) => {
+        seed += parseFloat(e.balance.replace(/\D/g,""));
+        return seed;
+    }, 0) / array.length * 0.01;
+};
 
-var firstLetterCount;
+var firstLetterCount = function(array, letter) {
+    return _.reduce(array, (seed, e, i) => {
+        if (e.name[0].toLowerCase() === letter.toLowerCase()) seed++;
+        return seed;
+    }, 0);
+};
 
-var friendFirstLetterCount;
+var friendFirstLetterCount = function(array, customer, letter) {
+    return firstLetterCount(customer.friends, letter);
+};
 
 var friendsCount;
 
