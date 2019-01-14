@@ -50,7 +50,7 @@ var youngestCustomer = function(array) {
 
 var averageBalance = function(array) {
     return  _.reduce(array, (seed, e, i) => {
-        seed += parseFloat(e.balance.replace(/\D/g,""));
+        seed += parseInt(e.balance.replace(/\D/g,""));
         return seed;
     }, 0) / array.length * 0.01;
 };
@@ -63,14 +63,55 @@ var firstLetterCount = function(array, letter) {
 };
 
 var friendFirstLetterCount = function(array, customer, letter) {
-    return firstLetterCount(customer.friends, letter);
+    let targetFriends = [];
+    _.every(array, (e, i, a) => {
+       if (e.name.toLowerCase() === customer.toLowerCase()) {
+           targetFriends = e.friends;
+       }
+    });
+    return firstLetterCount(targetFriends, letter);
 };
 
-var friendsCount;
+var friendsCount = function(array, name) {
+    let result = [];
+    _.every(array, (e,i,a) => {
+        if (e.name !== name) {  // they can't be on their own list of friends
+            _.each(e.friends, (element, index, array) => {
+               if (element.name === name) result.push(e.name); 
+            });
+        }
+    });
+    return result;
+};
 
-var topThreeTags;
+var topThreeTags = function(array) {
+    let temp = {};
+    // make an object with each tag and a count of its frequency
+    _.every(array, (e, i, a) => {
+        _.every(e.tags, (element, index, array) => {
+           temp[element] = (temp[element] + 1) || 1; 
+        });
+    });
+    // use reduce (some other function??) to list the keys with the top 3 highest counts
+    let arr = [];
+    for (let key in temp) {
+        arr.push({"tag": key, "count": temp[key]});
+    }
+    arr.sort((a, b) => {return b.count - a.count});
+    let result = [];
+    for (let i = 0; i < 3; i++) {
+        result.push(arr[i].tag);
+    }
+    return result;
+};
 
-var genderCount;
+var genderCount = function(array) {
+    let result = {};
+    _.reduce(array, (seed, e, i) => {
+        return result[e.gender] = (result[e.gender] + 1) || 1;
+    },0);
+    return result;
+};
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
