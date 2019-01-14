@@ -44,13 +44,13 @@ var youngestCustomer = function(array) {
     let youth = array[0];
     _.each(array, (e, i, a) => {
         if (youth.age > e.age) youth = e;
-    })
+    });
     return youth.name;
 };
 
 var averageBalance = function(array) {
     return  _.reduce(array, (seed, e, i) => {
-        seed += parseInt(e.balance.replace(/\D/g,""));
+        seed += parseFloat(e.balance.replace(/\D/g,""));
         return seed;
     }, 0) / array.length * 0.01;
 };
@@ -64,7 +64,7 @@ var firstLetterCount = function(array, letter) {
 
 var friendFirstLetterCount = function(array, customer, letter) {
     let targetFriends = [];
-    _.every(array, (e, i, a) => {
+    _.each(array, (e, i, a) => {
        if (e.name.toLowerCase() === customer.toLowerCase()) {
            targetFriends = e.friends;
        }
@@ -74,7 +74,7 @@ var friendFirstLetterCount = function(array, customer, letter) {
 
 var friendsCount = function(array, name) {
     let result = [];
-    _.every(array, (e,i,a) => {
+    _.each(array, (e,i,a) => {
         if (e.name !== name) {  // they can't be on their own list of friends
             _.each(e.friends, (element, index, array) => {
                if (element.name === name) result.push(e.name); 
@@ -87,18 +87,19 @@ var friendsCount = function(array, name) {
 var topThreeTags = function(array) {
     let temp = {};
     // make an object with each tag and a count of its frequency
-    _.every(array, (e, i, a) => {
-        _.every(e.tags, (element, index, array) => {
+    _.each(array, (e, i, a) => {
+        _.each(e.tags, (element, index, array) => {
            temp[element] = (temp[element] + 1) || 1; 
         });
     });
-    // use reduce (some other function??) to list the keys with the top 3 highest counts
     let arr = [];
+    // takes the tag and count from the temp object and splits each one into their own object and pushes it into a new array
     for (let key in temp) {
         arr.push({"tag": key, "count": temp[key]});
     }
-    arr.sort((a, b) => {return b.count - a.count});
+    arr.sort((a, b) => {return b.count - a.count}); // sorts the tags by their count
     let result = [];
+    // pushes the name of the first 3 tags into an array
     for (let i = 0; i < 3; i++) {
         result.push(arr[i].tag);
     }
