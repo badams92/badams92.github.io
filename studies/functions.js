@@ -28,14 +28,14 @@
  * within the function scope can not be modified outside of the function.  This allows 
  * for re-use of the same variable names across multiple functions, if desired.
  * 
- * 6. A closure is the combination of a function and the lexical environment within 
- * which that function was declared.  The environment consists of any local variables 
- * that were in-scope at the time the closure was created.  Closures are useful because 
- * they let you associate some data with a function that operates on that data.
+ * 6. A closure is how JavaScript handles how functions interact with all the variables 
+ * in its scope.  A function can access and change variables from its parent or global 
+ * scope.  If a function changes the value of a variable in its parent scope, the 
+ * variable will keep the new value.
  */
  
 // function declaration with the parameters of two variables
-function multiply (a, b) {
+function multiply(a, b) {
     return a * b;
 }
 // this function will return the product of its two input parameters
@@ -49,12 +49,12 @@ var func1 = function() {
 };
 
 console.log(func1); // prints [Function]
-console.log(multiply()); //
+console.log(multiply()); 
 
 let results = [];
 
 // a function that affects something in its parent scope
-function sum (a, b) {
+function sum(a, b) {
     results.push(a + b);
 }
 

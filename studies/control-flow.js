@@ -46,11 +46,19 @@ if ("green" === "red") {
  * 1. Unlike IF blocks, switches will not stop executing once a TRUE expression is 
  * encountered.  Therefore a break statement is needed between cases.
  * 
+ * 2. Switch blocks are used when all of the cases for true values is already known
+ * before run time.
+ * 
+ * 3. It's possible to have several cases share the same code by not writing any 
+ * following code for that case, the program will execute the next block of code before 
+ * a break statement.
+ * 
  */
 
 let friedChicken = "popeyes";
 
 switch (friedChicken) {
+    case "zaxby's":
     case "canes":
         console.log("box combo, no slaw, extra sauce");
         break;
