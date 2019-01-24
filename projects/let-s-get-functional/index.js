@@ -76,7 +76,7 @@ var friendsCount = function(array, name) {
     let result = [];
     _.each(array, (e,i,a) => {
         if (e.name !== name) {  // they can't be on their own list of friends
-            _.each(e.friends, (element, index, array) => {
+            _.each(e.friends, (element, index, arr) => {
                if (element.name === name) result.push(e.name); 
             });
         }
@@ -88,7 +88,7 @@ var topThreeTags = function(array) {
     let temp = {};
     // make an object with each tag and a count of its frequency
     _.each(array, (e, i, a) => {
-        _.each(e.tags, (element, index, array) => {
+        _.each(e.tags, (element, index, arr) => {
            temp[element] = (temp[element] + 1) || 1; 
         });
     });
@@ -110,7 +110,7 @@ var genderCount = function(array) {
     let result = {};
     _.reduce(array, (seed, e, i) => {
         return result[e.gender] = (result[e.gender] + 1) || 1;
-    },0);
+    }, 0);
     return result;
 };
 
