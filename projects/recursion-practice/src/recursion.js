@@ -367,6 +367,12 @@ var compress = function(list) {
     return [];
   } else if (list.length === 1) {
     return list;
+  } else {
+    let result = compress(list.slice(1));
+    if (result[0] !== list[0]) {
+      result.unshift(list[0]);
+    }
+    return result;
   }
 };
 
@@ -380,6 +386,19 @@ var augmentElements = function(array, aug) {
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
 var minimizeZeroes = function(array) {
+  if (array.length === 0) {
+    return [];
+  } else if (array.length === 1) {
+    return array;
+  } else {
+    let result = minimizeZeroes(array.slice(1));
+    if (result[0] !== 0) {
+      result.unshift(array[0]);
+    } else if (array[0] !== 0) {
+      result.unshift(array[0]);
+    }
+    return result;
+  }
 };
 
 // 34. Alternate the numbers in an array between positive and negative regardless of
@@ -387,6 +406,16 @@ var minimizeZeroes = function(array) {
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function(array) {
+  if (array.length === 0) {
+    return array;
+  }
+  if (array[0] < 0) {
+    array[0] = -array[0];
+  }
+  if (array[1] > 0) {
+    array[1] = -array[1];
+  }
+  return [array[0], array[1]].concat(alternateSign(array.slice(2)));
 };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
