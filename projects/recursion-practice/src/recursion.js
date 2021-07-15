@@ -298,7 +298,7 @@ var capitalizeFirst = function(array) {
 var nestedEvenSum = function(obj) {
   let count = 0;
   for (let prop in obj) {
-    if (obj[prop] % 2 === 0) count += obj[prop]
+    if (obj[prop] % 2 === 0) count += obj[prop];
     if (typeof obj[prop] === 'object') count += nestedEvenSum(obj[prop]);
   }
   return count;
