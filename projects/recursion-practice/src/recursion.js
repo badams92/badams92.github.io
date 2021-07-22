@@ -31,6 +31,7 @@ var arraySum = function(array) {
 // 4. Check if a number is even.
 var isEven = function(n) {
   if (n < 0) return isEven(-n);
+  
   if (n === 0) return true;
   if (n === 1) return false;
   
@@ -54,6 +55,7 @@ var range = function(x, y) {
   
   if (y - x < 2) return [];
   if (y - x === 2) return [x + 1];
+  
   let list = range(x, y - 1);
   list.push(y - 1);
   return list;
@@ -170,7 +172,7 @@ var createArray = function(str){
 };
 
 // 17. Reverse the order of an array
-var reverseArr = function (array) {
+var reverseArr = function(array) {
   if (array.length === 0) return [];
 
   let list = reverseArr(array.slice(1));
@@ -393,7 +395,7 @@ var numToText = function(str) {
   
   let temp = numToText(str.slice(1));
   for (let prop in nums) {
-    if (str[0].includes(prop) && str[0] === prop) {
+    if (str[0] === prop) {
       return temp = nums[prop] + temp;
     }
   }
